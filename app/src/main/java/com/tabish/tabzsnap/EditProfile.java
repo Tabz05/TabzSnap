@@ -43,36 +43,36 @@ import java.util.Map;
 
 public class EditProfile extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    public Uri selectedImage;
+    private Uri selectedImage;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    EditText newUsername;
-    Button removePic;
+    private EditText newUsername;
+    private Button removePic;
 
-    Button chooseProfilePicEdit;
-    Button submitEditProfile;
+    private Button chooseProfilePicEdit;
+    private Button submitEditProfile;
 
-    ImageView imageView3;
+    private ImageView imageView3;
 
-    int found=0;
+    private int found=0;
 
-    boolean hasProfilePic;
+    private boolean hasProfilePic;
 
-    String profilePicUri;
+    private String profilePicUri;
 
-    String existing_username;
+    private String existing_username;
 
-    String currUsername;
+    private String currUsername;
 
-    String new_username;
+    private String new_username;
 
-    public void getPhoto() {
+    private void getPhoto() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         someActivityResultLauncher.launch(intent);
     }
@@ -234,7 +234,7 @@ public class EditProfile extends AppCompatActivity {
         });
     }*/
 
-    public void updateImage()
+    private void updateImage()
     {
         ProgressDialog progressDialog
                 = new ProgressDialog(this);
@@ -392,7 +392,7 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

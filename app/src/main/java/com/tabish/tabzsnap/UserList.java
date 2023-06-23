@@ -29,24 +29,25 @@ import java.util.ArrayList;
 
 public class UserList extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    ListView listViewUser;
+    private ListView listViewUser;
 
-    String currUsername;
+    private String currUsername;
 
-    String user_id;
-    String User_Id;
-    String username;
-    ArrayList<String> usersList;
+    private String user_id;
+    private String User_Id;
+    private String username;
 
-    ArrayList<String> followingList;
+    private ArrayList<String> usersList;
 
-    ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> followingList;
 
-    public void getUserList()
+    private ArrayAdapter<String> arrayAdapter;
+
+    private void getUserList()
     {
         db.collection("users")
                 .get()
@@ -71,7 +72,7 @@ public class UserList extends AppCompatActivity {
                 });
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -37,49 +36,48 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 import java.util.Map;
 
 public class MyProfile extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    TextView myProfileText;
-    ImageView myProfilePicture;
-    TextView myPostText;
+    private TextView myProfileText;
+    private ImageView myProfilePicture;
+    private TextView myPostText;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    LinearLayout linearLayout;
+    private LinearLayout linearLayout;
 
-    String uri;
-    Timestamp timestamp;
-    String postText;
+    private String uri;
+    private Timestamp timestamp;
+    private String postText;
 
-    String uri_to_delete;
-    int delete_button_tag;
+    private String uri_to_delete;
+    private int delete_button_tag;
 
-    DocumentReference noOfPosts;
+    private DocumentReference noOfPosts;
 
-    String username;
-    String email;
-    String joinedOn;
-    String no_of_followers;
-    String no_of_following;
-    String no_of_posts;
-    String hasProfilePic;
-    String profileUri;
+    private String username;
+    private String email;
+    private String joinedOn;
+    private String no_of_followers;
+    private String no_of_following;
+    private String no_of_posts;
+    private String hasProfilePic;
+    private String profileUri;
 
-    ArrayList<String> uriList;
-    ArrayList<Timestamp> timeStampList;
+    private ArrayList<String> uriList;
+    private ArrayList<Timestamp> timeStampList;
 
-    int count=-1;
+    private int count=-1;
 
     public void getMyFollowers(View view)
     {
@@ -99,7 +97,7 @@ public class MyProfile extends AppCompatActivity {
         startActivity(goToMyFollowing);
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

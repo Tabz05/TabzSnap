@@ -35,20 +35,20 @@ import java.util.Map;
 
 public class picUpload extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    public Uri selectedImage;
+    private Uri selectedImage;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    ImageView imageView;
+    private ImageView imageView;
 
-    Button removeProfilePic;
+    private Button removeProfilePic;
 
-    public void getPhoto()
+    private void getPhoto()
     {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         someActivityResultLauncher.launch(intent);

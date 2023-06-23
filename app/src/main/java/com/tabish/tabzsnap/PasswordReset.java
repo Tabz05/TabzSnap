@@ -16,15 +16,15 @@ import com.google.firebase.auth.FirebaseAuthException;
 public class PasswordReset extends AppCompatActivity {
 
     //initializing authentication variables
-    FirebaseAuth frbAuth;
+    private FirebaseAuth frbAuth;
 
     //initializing xml variables
-    TextView passwordResetText;
-    EditText passwordResetEmail;
-    Button passwordResetButton;
+    private TextView passwordResetText;
+    private EditText passwordResetEmail;
+    private Button passwordResetButton;
 
     //initializing String variables
-    String email_id;
+    private String email_id;
 
     public void SubmitPasswordReset (View view) //when reset password button is clicked
     {

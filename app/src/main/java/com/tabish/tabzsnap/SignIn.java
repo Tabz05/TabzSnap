@@ -17,15 +17,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignIn extends AppCompatActivity {
 
-    EditText emailSignIn;
-    EditText passSignIn;
-    TextView forgotPassword;
+    private EditText emailSignIn;
+    private EditText passSignIn;
+    private TextView forgotPassword;
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    public void loginUser() {
+    private void loginUser() {
+
         String email = emailSignIn.getText().toString();
         String password = passSignIn.getText().toString();
         frbAuth.signInWithEmailAndPassword(email, password)

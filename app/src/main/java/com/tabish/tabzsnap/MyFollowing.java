@@ -29,22 +29,22 @@ import java.util.ArrayList;
 
 public class MyFollowing extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    ListView MyFollowingListView;
+    private ListView MyFollowingListView;
 
-    String currUsername;
+    private String currUsername;
 
-    String user_id;
-    String username;
+    private String user_id;
+    private String username;
 
-    ArrayList<String> followingList;
+    private ArrayList<String> followingList;
 
-    ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> arrayAdapter;
 
-    public void getFollowingList()
+    private void getFollowingList()
     {
         db.collection("users").document(currentUser.getUid()).collection("Following")
                 .get()
@@ -65,7 +65,7 @@ public class MyFollowing extends AppCompatActivity {
                 });
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

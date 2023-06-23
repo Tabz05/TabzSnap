@@ -46,26 +46,26 @@ import java.util.Map;
 
 public class UploadPost extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    public Uri selectedImage;
+    private Uri selectedImage;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    ImageView imageView;
+    private ImageView imageView;
 
-    EditText postText;
+    private EditText postText;
 
-    Button removePostPic;
+    private Button removePostPic;
 
-    Timestamp postUploadedTimeStamp;
+    private Timestamp postUploadedTimeStamp;
 
-    DocumentReference noOfPosts;
+    private DocumentReference noOfPosts;
 
-    public void getPhoto()
+    private void getPhoto()
     {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         someActivityResultLauncher.launch(intent);
@@ -238,7 +238,7 @@ public class UploadPost extends AppCompatActivity {
         removePostPic.setEnabled(false);
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

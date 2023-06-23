@@ -45,47 +45,47 @@ import java.util.Map;
 
 public class UserProfile extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    String user_id;
+    private String user_id;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    TextView userProfileText;
-    ImageView userProfilePicture;
+    private TextView userProfileText;
+    private ImageView userProfilePicture;
 
-    Button FollowUnfollow;
+    private Button FollowUnfollow;
 
-    TextView userPostText;
-    TextView UserFollowers;
-    TextView UserFollowing;
+    private TextView userPostText;
+    private TextView UserFollowers;
+    private TextView UserFollowing;
 
-    String currUsername;
+    private String currUsername;
 
-    boolean follow=false;
+    private boolean follow=false;
 
-    LinearLayout linearLayout;
+    private LinearLayout linearLayout;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    String uri;
-    Timestamp timestamp;
-    String postText;
+    private String uri;
+    private Timestamp timestamp;
+    private String postText;
 
-    String username;
-    String email;
-    String joinedOn;
-    String no_of_followers;
-    String no_of_following;
-    String no_of_posts;
-    String hasProfilePic;
-    String profileUri;
+    private String username;
+    private String email;
+    private String joinedOn;
+    private String no_of_followers;
+    private String no_of_following;
+    private String no_of_posts;
+    private String hasProfilePic;
+    private String profileUri;
 
-    DocumentReference noOfFollowers;
-    DocumentReference noOfFollowing;
+    private DocumentReference noOfFollowers;
+    private DocumentReference noOfFollowing;
 
     public void getUserFollowers(View view)
     {
@@ -105,7 +105,7 @@ public class UserProfile extends AppCompatActivity {
         startActivity(goToUserFollowing);
     }
 
-    public void checkFollowOrUnfollow()
+    private void checkFollowOrUnfollow()
     {
         db.collection("users").document(user_id).collection("Followers")
                 .get()
@@ -213,7 +213,7 @@ public class UserProfile extends AppCompatActivity {
 
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

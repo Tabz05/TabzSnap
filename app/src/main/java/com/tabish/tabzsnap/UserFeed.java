@@ -34,32 +34,32 @@ import java.util.ArrayList;
 
 public class UserFeed extends AppCompatActivity {
 
-    FirebaseAuth frbAuth;
-    FirebaseUser currentUser;
-    FirebaseFirestore db;
+    private FirebaseAuth frbAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    LinearLayout linearLayout;
+    private LinearLayout linearLayout;
 
-    String currUsername;
+    private String currUsername;
 
-    String following_id;
+    private String following_id;
 
-    ArrayList<String> followingList;
+    private ArrayList<String> followingList;
 
-    String uri;
+    private String uri;
 
-    String postText;
+    private String postText;
 
-    String owner;
+    private String owner;
 
-    String ownerName;
+    private String ownerName;
 
-    public void showPost()
+    private void showPost()
     {
 
         db.collection("posts").orderBy("timestamp", Query.Direction.DESCENDING)
@@ -135,7 +135,7 @@ public class UserFeed extends AppCompatActivity {
                 });
     }
 
-    public boolean isNetworkAvailable() { // to check if connected to internet
+    private boolean isNetworkAvailable() { // to check if connected to internet
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
