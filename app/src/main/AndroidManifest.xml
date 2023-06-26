@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tabish.tabzsnap">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -9,32 +8,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TabzSnap">
-        <activity android:name=".UserFollowers"></activity>
+        <activity android:name=".UserFollowers" />
         <activity android:name=".UserFollowing" />
         <activity android:name=".UserProfile" />
-        <activity android:name=".UserList" />
-        <activity android:name=".UserFeed" />
-        <activity android:name=".UploadPost" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn" />
         <activity android:name=".picUpload" />
         <activity android:name=".PasswordReset" />
-        <activity android:name=".MyProfile" />
         <activity android:name=".MyFollowing" />
         <activity android:name=".MyFollowers" />
-        <activity android:name=".EditProfile" />
         <activity android:name=".AboutUs" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

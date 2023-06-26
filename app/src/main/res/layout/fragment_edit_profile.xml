@@ -2,14 +2,11 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/feedLinearLayout"
+    android:id="@+id/editProfileLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="11"
-    tools:context="com.tabish.tabzsnap.picUpload">
+    android:weightSum="10">
 
     <Space
         android:layout_width="match_parent"
@@ -17,13 +14,17 @@
         android:layout_weight="1" />
 
     <ImageView
-        android:id="@+id/profileImageView"
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:layout_marginStart="80dp"
         android:layout_marginEnd="80dp"
-        app:srcCompat="@drawable/profilepic" />
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginStart="80dp"
+        app:srcCompat="@drawable/profilepic"
+        android:scaleType="fitXY"
+        />
 
     <Space
         android:layout_width="match_parent"
@@ -31,14 +32,17 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/removeProfilePic"
+        android:id="@+id/removeProfilePicEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/button"
-        android:onClick="removeProfilePic"
-        android:text="Remove profile picture"
+        android:enabled="false"
+        android:text="Remove Profile Picture"
+        android:textSize="13sp"
         android:visibility="invisible"
         app:backgroundTint="@color/red" />
 
@@ -48,14 +52,18 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/chooseProfilePic"
+        android:id="@+id/chooseProfilePicEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:onClick="uploadProfilePic"
-        android:text="Choose profile picture"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/button"
+        android:enabled="false"
+        android:text="Choose new profile pic"
+        android:textSize="13sp"
+        android:visibility="invisible"
         app:backgroundTint="@color/green" />
 
     <Space
@@ -64,29 +72,20 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/submitProfilePic"
+        android:id="@+id/submitEditProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:onClick="submitProfilePic"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/button"
+        android:enabled="false"
         android:text="Submit"
+        android:textSize="13sp"
+        android:visibility="invisible"
         app:backgroundTint="#bb12e6" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/skipProfilePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="skipPicUpload"
-        android:text="SKIP"
-        android:textColor="@color/blue"
-        android:textSize="20sp" />
 
     <Space
         android:layout_width="match_parent"

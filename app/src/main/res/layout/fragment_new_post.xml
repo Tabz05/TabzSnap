@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/feedLinearLayout"
+    android:id="@+id/uploadPostLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="11"
-    tools:context="com.tabish.tabzsnap.picUpload">
+    android:weightSum="15">
 
     <Space
         android:layout_width="match_parent"
@@ -17,13 +16,15 @@
         android:layout_weight="1" />
 
     <ImageView
-        android:id="@+id/profileImageView"
+        android:id="@+id/postImageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="6"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="80dp"
-        app:srcCompat="@drawable/profilepic" />
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/profilepic"
+        android:scaleType="fitXY"/>
 
     <Space
         android:layout_width="match_parent"
@@ -31,15 +32,14 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/removeProfilePic"
+        android:id="@+id/removePostPic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Remove picture"
+        android:visibility="invisible"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button"
-        android:onClick="removeProfilePic"
-        android:text="Remove profile picture"
-        android:visibility="invisible"
         app:backgroundTint="@color/red" />
 
     <Space
@@ -48,14 +48,13 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/chooseProfilePic"
+        android:id="@+id/choosePostPic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:onClick="uploadProfilePic"
-        android:text="Choose profile picture"
+        android:text="Choose picture"
+        android:background="@drawable/button"
         app:backgroundTint="@color/green" />
 
     <Space
@@ -63,30 +62,36 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/submitProfilePic"
+    <EditText
+        android:id="@+id/postText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="submitProfilePic"
-        android:text="Submit"
-        app:backgroundTint="#bb12e6" />
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_weight="3"
+        android:hint="Enter description..."
+        android:gravity="start|top"
+        android:textSize="16sp"
+        android:background="@drawable/edit_text_border"
+        android:textColor="@color/black" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/skipProfilePic"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/submitPostPic"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="skipPicUpload"
-        android:text="SKIP"
-        android:textColor="@color/blue"
-        android:textSize="20sp" />
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Submit"
+        android:background="@drawable/button"
+        app:backgroundTint="@color/blue" />
 
     <Space
         android:layout_width="match_parent"
