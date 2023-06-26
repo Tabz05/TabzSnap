@@ -17,8 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -126,202 +129,191 @@ public class MyProfileFragment extends Fragment {
 
             myProfilelinearLayout = view.findViewById(R.id.myProfileLinearLayout);
 
-            db.collection("users").document(currentUser.getUid()).
-                    addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                            @Nullable FirebaseFirestoreException e) {
-                            if (e != null) {
+            db.collection("users").document(currentUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
 
-                                return;
-                            }
+                            Map<String, Object> userDetails = document.getData();
+                            username = userDetails.get("username").toString();
+                            email = userDetails.get("email").toString();
+                            // joinedOn = userDetails.get("joinedOn").toString();
+                            no_of_followers = userDetails.get("no_of_followers").toString();
+                            no_of_following = userDetails.get("no_of_following").toString();
+                            no_of_posts = userDetails.get("no_of_posts").toString();
+                            hasProfilePic = userDetails.get("hasProfilePic").toString();
 
-                            if (snapshot != null && snapshot.exists()) {
+                            usernameText.setText(username);
+                            emailText.setText(email);
 
-                                Map<String, Object> userDetails = snapshot.getData();
-                                username = userDetails.get("username").toString();
-                                email = userDetails.get("email").toString();
-                                // joinedOn = userDetails.get("joinedOn").toString();
-                                no_of_followers = userDetails.get("no_of_followers").toString();
-                                no_of_following = userDetails.get("no_of_following").toString();
-                                no_of_posts = userDetails.get("no_of_posts").toString();
-                                hasProfilePic = userDetails.get("hasProfilePic").toString();
+                            myFollowerText.setText("My Followers (" + no_of_followers.toString() + ")");
+                            myFollowingText.setText("My Followings (" + no_of_following.toString() + ")");
 
-                                usernameText.setText(username);
-                                emailText.setText(email);
-
-                                myFollowerText.setText("My Followers (" + no_of_followers.toString() + ")");
-                                myFollowingText.setText("My Followings (" + no_of_following.toString() + ")");
-
-                                if (hasProfilePic.equals("true")) {
-                                    profileUri = userDetails.get("profilePicUri").toString();
-                                    Glide.with(requireContext().getApplicationContext()).load(profileUri.toString()).into(myProfilePicture);
-                                } else {
-                                    myProfilePicture.setImageResource(R.drawable.profilepic);
-                                }
-
-                                myPostText.setText("Your Posts (" + no_of_posts.toString() + ")");
-
+                            if (hasProfilePic.equals("true")) {
+                                profileUri = userDetails.get("profilePicUri").toString();
+                                Glide.with(requireContext().getApplicationContext()).load(profileUri.toString()).into(myProfilePicture);
                             } else {
-
+                                myProfilePicture.setImageResource(R.drawable.profilepic);
                             }
+
+                            myPostText.setText("Your Posts (" + no_of_posts.toString() + ")");
+
+                        } else {
+                            //   Log.d(TAG, "No such document");
                         }
-                    });
+                    } else {
+                        //Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
 
             db.collection("users").document(currentUser.getUid()).collection("posts").orderBy("timestamp", Query.Direction.DESCENDING)
-                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onEvent(@Nullable QuerySnapshot snapshots,
-                                            @Nullable FirebaseFirestoreException e) {
-                            if (e != null) {
-                                return;
-                            }
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                            for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                                switch (dc.getType()) {
-                                    case ADDED:
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                        count += 1;
+                                    count += 1;
 
-                                        uri = (String) dc.getDocument().get("uri");
+                                    uri = (String) document.get("uri");
 
-                                        uriList.add(uri.toString());
+                                    uriList.add(uri.toString());
 
-                                        timestamp = (Timestamp) dc.getDocument().get("timestamp");
+                                    timestamp = (Timestamp) document.get("timestamp");
 
-                                        timeStampList.add(timestamp);
+                                    timeStampList.add(timestamp);
 
-                                        postText = (String) dc.getDocument().get("text");
+                                    postText = (String) document.get("text");
 
-                                        LinearLayout linearLayout = new LinearLayout(requireContext().getApplicationContext());
+                                    LinearLayout linearLayout = new LinearLayout(requireContext().getApplicationContext());
 
-                                        linearLayout.setOrientation(LinearLayout.VERTICAL);
-                                        linearLayout.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.layout_background));
-                                        linearLayout.setPadding(40, 40, 40, 40);
+                                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+                                    linearLayout.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.layout_background));
+                                    linearLayout.setPadding(40, 40, 40, 40);
 
-                                        LinearLayout.LayoutParams linearLayoutLayoutParams = new LinearLayout.LayoutParams(
-                                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                                LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    LinearLayout.LayoutParams linearLayoutLayoutParams = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                                        linearLayoutLayoutParams.setMargins(40, 25, 40, 25);
+                                    linearLayoutLayoutParams.setMargins(40, 25, 40, 25);
 
-                                        if (postText.length() > 0) {
-                                            TextView textView = new TextView(requireContext().getApplicationContext());
+                                    if (postText.length() > 0) {
+                                        TextView textView = new TextView(requireContext().getApplicationContext());
 
-                                            LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(
-                                                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                                                    LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                                            textViewLayoutParams.setMargins(0, 0, 0, 20);
-
-                                            textView.setText(postText);
-
-                                            textView.setTextSize(20);
-                                            textView.setTextColor(getResources().getColor(R.color.black));
-
-                                            linearLayout.addView(textView, textViewLayoutParams);
-                                        }
-
-                                        ImageView imageView = new ImageView(requireContext().getApplicationContext());
-
-                                        LinearLayout.LayoutParams imageLayoutParams = new LinearLayout.LayoutParams(
-                                                dpToPx(275),
-                                                dpToPx(275));
-
-                                        imageLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-
-                                        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-                                        Glide.with(requireContext().getApplicationContext()).load(uri.toString()).into(imageView);
-
-                                        linearLayout.addView(imageView, imageLayoutParams);
-
-                                        ImageButton deleteButton = new ImageButton(requireContext().getApplicationContext());
-
-                                        LinearLayout.LayoutParams layoutParamsButton = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(
                                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                                        layoutParamsButton.setMargins(0, 20, 0, 0);
+                                        textViewLayoutParams.setMargins(0, 0, 0, 20);
 
-                                        deleteButton.setImageResource(R.drawable.ic_baseline_delete_forever_24);
-                                        deleteButton.setBackgroundColor(getResources().getColor(R.color.white));
+                                        textView.setText(postText);
 
-                                        deleteButton.setTag(count);
+                                        textView.setTextSize(20);
+                                        textView.setTextColor(getResources().getColor(R.color.black));
 
-                                        deleteButton.setOnClickListener(new View.OnClickListener() {
-                                            public void onClick(View v) {
+                                        linearLayout.addView(textView, textViewLayoutParams);
+                                    }
 
-                                                delete_button_tag = (int) v.getTag();
+                                    ImageView imageView = new ImageView(requireContext().getApplicationContext());
 
-                                                uri_to_delete = uriList.get(delete_button_tag);
+                                    LinearLayout.LayoutParams imageLayoutParams = new LinearLayout.LayoutParams(
+                                            dpToPx(275),
+                                            dpToPx(275));
 
-                                                StorageReference storageReference = storage.getReferenceFromUrl(uri_to_delete.toString());
-                                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
+                                    imageLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
 
-                                                        db.collection("users").document(currentUser.getUid()).collection("posts").document(currentUser.getUid() + timeStampList.get(delete_button_tag))
-                                                                .delete()
-                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                    @Override
-                                                                    public void onSuccess(Void aVoid) {
+                                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                                                                        db.collection("posts").document(currentUser.getUid() + timeStampList.get(delete_button_tag))
-                                                                                .delete()
-                                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                                    @Override
-                                                                                    public void onSuccess(Void aVoid) {
+                                    Glide.with(requireContext().getApplicationContext()).load(uri.toString()).into(imageView);
 
-                                                                                        Toast.makeText(requireContext(), "Deleted successfully", Toast.LENGTH_LONG).show();
+                                    linearLayout.addView(imageView, imageLayoutParams);
 
-                                                                                        uriList.remove(delete_button_tag);
+                                    ImageButton deleteButton = new ImageButton(requireContext().getApplicationContext());
 
-                                                                                        count-=1;
+                                    LinearLayout.LayoutParams layoutParamsButton = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                                                                                        noOfPosts.update("no_of_posts", FieldValue.increment(-1));
+                                    layoutParamsButton.setMargins(0, 20, 0, 0);
 
-                                                                                        MyProfileFragment myProfileFragment = new MyProfileFragment();
-                                                                                        ((MainActivity) requireActivity()).switchFragment(myProfileFragment);
-                                                                                    }
-                                                                                })
-                                                                                .addOnFailureListener(new OnFailureListener() {
-                                                                                    @Override
-                                                                                    public void onFailure(@NonNull Exception e) {
+                                    deleteButton.setImageResource(R.drawable.ic_baseline_delete_forever_24);
+                                    deleteButton.setBackgroundColor(getResources().getColor(R.color.white));
 
-                                                                                    }
-                                                                                });
+                                    deleteButton.setTag(count);
 
-                                                                    }
-                                                                })
-                                                                .addOnFailureListener(new OnFailureListener() {
-                                                                    @Override
-                                                                    public void onFailure(@NonNull Exception e) {
+                                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                                        public void onClick(View v) {
 
-                                                                    }
-                                                                });
-                                                    }
-                                                });
+                                            delete_button_tag = (int) v.getTag();
 
-                                            }
-                                        });
+                                            uri_to_delete = uriList.get(delete_button_tag);
 
-                                        linearLayout.addView(deleteButton, layoutParamsButton);
+                                            StorageReference storageReference = storage.getReferenceFromUrl(uri_to_delete.toString());
+                                            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
 
-                                        myProfilelinearLayout.addView(linearLayout, linearLayoutLayoutParams);
+                                                    db.collection("users").document(currentUser.getUid()).collection("posts").document(currentUser.getUid() + timeStampList.get(delete_button_tag))
+                                                            .delete()
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
 
-                                        break;
-                                    case MODIFIED:
+                                                                    db.collection("posts").document(currentUser.getUid() + timeStampList.get(delete_button_tag))
+                                                                            .delete()
+                                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void aVoid) {
 
-                                        break;
-                                    case REMOVED:
+                                                                                    Toast.makeText(requireContext(), "Deleted successfully", Toast.LENGTH_LONG).show();
 
-                                        break;
+                                                                                    uriList.remove(delete_button_tag);
+
+                                                                                    count-=1;
+
+                                                                                    noOfPosts.update("no_of_posts", FieldValue.increment(-1));
+
+                                                                                    MyProfileFragment myProfileFragment = new MyProfileFragment();
+                                                                                    ((MainActivity) requireActivity()).switchFragment(myProfileFragment);
+                                                                                }
+                                                                            })
+                                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                                @Override
+                                                                                public void onFailure(@NonNull Exception e) {
+
+                                                                                }
+                                                                            });
+
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+
+                                                                }
+                                                            });
+                                                }
+                                            });
+
+                                        }
+                                    });
+
+                                    linearLayout.addView(deleteButton, layoutParamsButton);
+
+                                    myProfilelinearLayout.addView(linearLayout, linearLayoutLayoutParams);
+
                                 }
-                            }
 
+                            } else {
+                                //Log.i("Error getting documents: ", task.getException());
+                            }
                         }
-            });
+                    });
 
             myFollowerText.setOnClickListener(new View.OnClickListener() {
                 @Override
