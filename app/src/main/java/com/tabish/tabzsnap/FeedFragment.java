@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +31,6 @@ public class FeedFragment extends Fragment {
     private FirebaseAuth frbAuth;
     private FirebaseUser currentUser;
     private FirebaseFirestore db;
-
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -171,9 +167,6 @@ public class FeedFragment extends Fragment {
             currentUser = frbAuth.getCurrentUser();
             db = FirebaseFirestore.getInstance();
 
-            storage = FirebaseStorage.getInstance();
-            storageReference = storage.getReference();
-
             swipeRefreshLayout = view.findViewById(R.id.feedSwipeRefresh);
 
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -235,6 +228,8 @@ public class FeedFragment extends Fragment {
                     }
                 }
             });
+
+
         }
 
         return view;

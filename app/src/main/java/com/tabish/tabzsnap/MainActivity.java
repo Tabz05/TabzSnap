@@ -12,13 +12,11 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth frbAuth;
     private FirebaseUser currentUser;
-    private FirebaseFirestore db;
 
     private Fragment feedFragment;
 
@@ -77,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         frbAuth = FirebaseAuth.getInstance();
         currentUser = frbAuth.getCurrentUser();
-        db = FirebaseFirestore.getInstance();
 
         if(currentUser==null)
         {
@@ -100,41 +97,36 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.feed:
 
                         FeedFragment feedFragment = new FeedFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentContainer, feedFragment)
-                                .commit();
+
+                        switchFragment(feedFragment);
                         return true;
 
                     case R.id.myProfile:
 
                         MyProfileFragment myProfileFragment = new MyProfileFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentContainer, myProfileFragment)
-                                .commit();
+
+                        switchFragment(myProfileFragment);
                         return true;
 
                     case R.id.newPost:
                         // Replace the current fragment with your Fragment 3
                         NewPostFragment newPostFragment = new NewPostFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentContainer, newPostFragment)
-                                .commit();
+
+                        switchFragment(newPostFragment);
+
                         return true;
 
                     case R.id.editProfile:
                         // Replace the current fragment with your Fragment 3
                         EditProfileFragment editProfileFragment = new EditProfileFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentContainer, editProfileFragment)
-                                .commit();
+
+                        switchFragment(editProfileFragment);
                         return true;
 
                     case R.id.findPeople:
                         // Replace the current fragment with your Fragment 3
                         UserListFragment userListFragment = new UserListFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentContainer, userListFragment)
-                                .commit();
+                        switchFragment(userListFragment);
                         return true;
                 }
                 return false;

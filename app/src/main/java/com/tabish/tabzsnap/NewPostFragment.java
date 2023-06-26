@@ -156,8 +156,7 @@ public class NewPostFragment extends Fragment {
                                         newPost.put("ownerName", currUsername);
                                         newPost.put("text", postText.getText().toString());
 
-                                        noOfPosts.update("total_no_of_posts", FieldValue.increment(1));
-                                        noOfPosts.update("no_of_posts_active", FieldValue.increment(1));
+                                        noOfPosts.update("no_of_posts", FieldValue.increment(1));
 
                                         // Code for showing progressDialog while uploading
                                         ProgressDialog progressDialog = new ProgressDialog(requireContext());
@@ -199,10 +198,6 @@ public class NewPostFragment extends Fragment {
                                                                                                         // Dismiss dialog
                                                                                                         progressDialog.dismiss();
                                                                                                         Toast.makeText(requireContext(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
-
-                                                                                                        Intent goToMainActivity = new Intent(requireContext().getApplicationContext(), MainActivity.class);
-
-                                                                                                        startActivity(goToMainActivity);
                                                                                                     }
                                                                                                 })
                                                                                                 .addOnFailureListener(new OnFailureListener() {

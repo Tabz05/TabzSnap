@@ -23,7 +23,8 @@
         android:layout_weight="5"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="80dp"
-        app:srcCompat="@drawable/profilepic" />
+        app:srcCompat="@drawable/profilepic"
+        android:scaleType="fitXY"/>
 
     <Space
         android:layout_width="match_parent"

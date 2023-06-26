@@ -134,7 +134,7 @@ public class UserProfile extends AppCompatActivity {
                                                 //   joinedOn = userDetails.get("joinedOn").toString();
                             no_of_followers= userDetails.get("no_of_followers").toString();
                             no_of_following = userDetails.get("no_of_following").toString();
-                            no_of_posts = userDetails.get("no_of_posts_active").toString();
+                            no_of_posts = userDetails.get("no_of_posts").toString();
                             hasProfilePic = userDetails.get("hasProfilePic").toString();
 
                             userUsernameText.setText(username);
@@ -291,6 +291,9 @@ public class UserProfile extends AppCompatActivity {
 
                     }
                 });
+
+        FollowUnfollow.setEnabled(true);
+        FollowUnfollow.setVisibility(View.VISIBLE);
 
         FollowUnfollow.setOnClickListener(new View.OnClickListener() {
             @Override

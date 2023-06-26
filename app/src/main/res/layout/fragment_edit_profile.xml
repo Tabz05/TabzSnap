@@ -19,8 +19,6 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:layout_marginEnd="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
         android:layout_marginStart="80dp"
         app:srcCompat="@drawable/profilepic"
         android:scaleType="fitXY"
@@ -36,8 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/button"
         android:enabled="false"
@@ -56,8 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/button"
         android:enabled="false"
@@ -76,15 +70,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/button"
         android:enabled="false"
         android:text="Submit"
         android:textSize="13sp"
         android:visibility="invisible"
-        app:backgroundTint="#bb12e6" />
+        app:backgroundTint="@color/purple" />
 
 
     <Space

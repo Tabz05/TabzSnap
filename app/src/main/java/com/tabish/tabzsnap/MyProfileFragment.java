@@ -43,7 +43,6 @@ public class MyProfileFragment extends Fragment {
     private FirebaseFirestore db;
 
     private FirebaseStorage storage;
-    private StorageReference storageReference;
 
     private TextView myFollowerText;
     private TextView myFollowingText;
@@ -98,7 +97,6 @@ public class MyProfileFragment extends Fragment {
             db = FirebaseFirestore.getInstance();
 
             storage = FirebaseStorage.getInstance();
-            storageReference = storage.getReference();
 
             swipeRefreshLayout = view.findViewById(R.id.myProfileSwipeRefresh);
 
@@ -146,7 +144,7 @@ public class MyProfileFragment extends Fragment {
                                 // joinedOn = userDetails.get("joinedOn").toString();
                                 no_of_followers = userDetails.get("no_of_followers").toString();
                                 no_of_following = userDetails.get("no_of_following").toString();
-                                no_of_posts = userDetails.get("no_of_posts_active").toString();
+                                no_of_posts = userDetails.get("no_of_posts").toString();
                                 hasProfilePic = userDetails.get("hasProfilePic").toString();
 
                                 usernameText.setText(username);
@@ -281,7 +279,10 @@ public class MyProfileFragment extends Fragment {
 
                                                                                         count-=1;
 
-                                                                                        noOfPosts.update("no_of_posts_active", FieldValue.increment(-1));
+                                                                                        noOfPosts.update("no_of_posts", FieldValue.increment(-1));
+
+                                                                                        MyProfileFragment myProfileFragment = new MyProfileFragment();
+                                                                                        ((MainActivity) requireActivity()).switchFragment(myProfileFragment);
                                                                                     }
                                                                                 })
                                                                                 .addOnFailureListener(new OnFailureListener() {

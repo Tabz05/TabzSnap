@@ -37,7 +37,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +51,6 @@ public class EditProfileFragment extends Fragment {
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    private EditText newUsername;
     private Button removePic;
 
     private Button chooseProfilePicEdit;
@@ -61,17 +59,9 @@ public class EditProfileFragment extends Fragment {
 
     private ImageView imageView3;
 
-    private int found=0;
-
     private boolean hasProfilePic;
 
     private String profilePicUri;
-
-    private String existing_username;
-
-    private String currUsername;
-
-    private String new_username;
 
     private void getPhoto() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -261,11 +251,7 @@ public class EditProfileFragment extends Fragment {
                                                         // Image uploaded successfully
                                                         // Dismiss dialog
                                                         progressDialog.dismiss();
-                                                        //Toast.makeText(EditProfile.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
-
-                                                        Intent goToMainActivity = new Intent(requireContext().getApplicationContext(),MainActivity.class);
-
-                                                        startActivity(goToMainActivity);
+                                                        Toast.makeText(getContext(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -328,7 +314,6 @@ public class EditProfileFragment extends Fragment {
             storage = FirebaseStorage.getInstance();
             storageReference = storage.getReference();
 
-            // newUsername=findViewById(R.id.newUsername);
             imageView3 = view.findViewById(R.id.imageView3);
             removePic = view.findViewById(R.id.removeProfilePicEdit);
 
@@ -337,6 +322,7 @@ public class EditProfileFragment extends Fragment {
             submitEditProfile = view.findViewById(R.id.submitEditProfile);
 
             DocumentReference docRef = db.collection("users").document(currentUser.getUid());
+
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

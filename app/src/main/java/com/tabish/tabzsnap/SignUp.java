@@ -43,8 +43,6 @@ public class SignUp extends AppCompatActivity {
     private EditText passSignUp;
     private TextView textsignup;
 
-    private Button signUpButton;
-
     private CountDownTimer countDownTimer;
 
     private String existing_username;
@@ -127,8 +125,7 @@ public class SignUp extends AppCompatActivity {
                                                                     newUser.put("username", username);
                                                                     newUser.put("email", email);
                                                                     newUser.put("hasProfilePic", false);
-                                                                    newUser.put("no_of_posts_active",0);
-                                                                    newUser.put("total_no_of_posts",0);
+                                                                    newUser.put("no_of_posts",0);
                                                                     newUser.put("no_of_followers", 0);
                                                                     newUser.put("no_of_following", 0);
                                                                     newUser.put("joinedOn", new Timestamp(new Date()));
@@ -234,7 +231,5 @@ public class SignUp extends AppCompatActivity {
         emailSignUp=findViewById(R.id.emailSignUp);
         passSignUp=findViewById(R.id.passSignUp);
         textsignup=findViewById(R.id.textSignUp);
-
-        signUpButton=findViewById(R.id.signUpButton);
     }
 }
