@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseFirestore db;
 
-    private Fragment feedFragment, newPostFragment, myProfileFragment, userListFragment;
+    private Fragment feedFragment;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -89,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavBar);
 
         feedFragment = new FeedFragment();
-        newPostFragment = new NewPostFragment();
-        myProfileFragment = new MyProfileFragment();
-        userListFragment = new UserListFragment();
 
         switchFragment(feedFragment);
 
