@@ -35,8 +35,6 @@ public class MyFollowing extends AppCompatActivity {
 
     private ListView MyFollowingListView;
 
-    private String currUsername;
-
     private String user_id;
     private String username;
 
@@ -92,8 +90,6 @@ public class MyFollowing extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists())
                     {
-                        currUsername = (String) document.get("username");
-
                         getFollowingList();
                     }
                     else

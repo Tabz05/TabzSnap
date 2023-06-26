@@ -35,8 +35,6 @@ public class MyFollowers extends AppCompatActivity {
 
     private ListView MyFollowersListView;
 
-    private String currUsername;
-
     private String user_id;
     private String username;
 
@@ -92,8 +90,6 @@ public class MyFollowers extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists())
                     {
-                        currUsername = (String) document.get("username");
-
                         getFollowerList();
                     }
                     else
