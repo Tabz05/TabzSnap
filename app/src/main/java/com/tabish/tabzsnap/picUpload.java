@@ -175,6 +175,7 @@ public class picUpload extends AppCompatActivity {
     public void skipPicUpload (View view)
     {
         Intent goToMainActivity = new Intent(getApplicationContext(),MainActivity.class);
+        goToMainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(goToMainActivity);
     }
 

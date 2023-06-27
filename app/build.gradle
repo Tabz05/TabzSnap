@@ -11,8 +11,8 @@ android {
         applicationId "com.tabish.tabzsnap"
         minSdkVersion 16
         targetSdkVersion 31
-        versionCode 20
-        versionName "5.0"
+        versionCode 21
+        versionName "5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
