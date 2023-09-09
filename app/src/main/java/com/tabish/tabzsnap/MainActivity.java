@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.newPost:
-                        // Replace the current fragment with your Fragment 3
+
                         NewPostFragment newPostFragment = new NewPostFragment();
 
                         switchFragment(newPostFragment);
@@ -117,14 +117,14 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.editProfile:
-                        // Replace the current fragment with your Fragment 3
+
                         EditProfileFragment editProfileFragment = new EditProfileFragment();
 
                         switchFragment(editProfileFragment);
                         return true;
 
                     case R.id.findPeople:
-                        // Replace the current fragment with your Fragment 3
+
                         UserListFragment userListFragment = new UserListFragment();
                         switchFragment(userListFragment);
                         return true;

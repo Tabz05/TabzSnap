@@ -29,7 +29,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +41,6 @@ public class UserProfile extends AppCompatActivity {
     private String user_id;
 
     private FirebaseStorage storage;
-    private StorageReference storageReference;
 
     private ImageView userProfilePicture;
 
@@ -99,7 +97,6 @@ public class UserProfile extends AppCompatActivity {
         FollowUnfollow=findViewById(R.id.FollowOrUnfollow);
 
         storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
 
         userProfilePicture=findViewById(R.id.userProfilePic);
 

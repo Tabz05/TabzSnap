@@ -31,7 +31,6 @@ public class UserListFragment extends Fragment {
 
     private String currUsername;
 
-    private String user_id;
     private String User_Id;
     private String username;
 
@@ -69,7 +68,7 @@ public class UserListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_user_list, container, false);
 
         if(isAdded()) {
@@ -126,7 +125,7 @@ public class UserListFragment extends Fragment {
                         }
                     });
 
-            listViewUser.setOnItemClickListener(new AdapterView.OnItemClickListener() { //when an item of listview is clicked
+            listViewUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 

@@ -133,7 +133,7 @@ public class UserFollowing extends AppCompatActivity {
             }
         });
 
-        listViewUserFollowing.setOnItemClickListener(new AdapterView.OnItemClickListener() { //when an item of listview is clicked
+        listViewUserFollowing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 

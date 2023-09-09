@@ -80,17 +80,13 @@ public class picUpload extends AppCompatActivity {
     {
         if (selectedImage != null) {
 
-            // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
                     = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            // Defining the child of storageReference
             StorageReference ref = storageReference.child("users").child(currentUser.getUid()).child("profilePic");
 
-            // adding listeners on upload
-            // or failure of image
             ref.putFile(selectedImage).addOnSuccessListener(
                     new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
@@ -112,8 +108,6 @@ public class picUpload extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
 
-                                                    // Image uploaded successfully
-                                                    // Dismiss dialog
                                                     progressDialog.dismiss();
                                                     Toast.makeText(picUpload.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
 
@@ -143,8 +137,6 @@ public class picUpload extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e)
                         {
-
-                            // Error, Image not uploaded
                             progressDialog.dismiss();
                             Toast.makeText(picUpload.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -152,8 +144,6 @@ public class picUpload extends AppCompatActivity {
                     .addOnProgressListener(
                             new OnProgressListener<UploadTask.TaskSnapshot>() {
 
-                                // Progress Listener for loading
-                                // percentage on the dialog box
                                 @Override
                                 public void onProgress(
                                         UploadTask.TaskSnapshot taskSnapshot)

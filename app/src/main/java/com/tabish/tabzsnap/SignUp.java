@@ -106,7 +106,7 @@ public class SignUp extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if (task.isSuccessful()) {
-                                                    // Sign in success, update UI with the signed-in user's information
+
 
                                                     sendEmailVerification();
 
@@ -170,7 +170,6 @@ public class SignUp extends AppCompatActivity {
                                                             });
 
                                                 } else {
-                                                    // If sign in fails, display a message to the user.
 
                                                     FirebaseAuthException e = (FirebaseAuthException) task.getException();
 

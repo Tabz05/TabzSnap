@@ -88,7 +88,7 @@ public class NewPostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view  = inflater.inflate(R.layout.fragment_new_post, container, false);
 
         if(isAdded()) {
@@ -114,7 +114,7 @@ public class NewPostFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { //checking if permission for gallery has been granted or not
+                    if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                     } else {
                         getPhoto();
@@ -158,16 +158,12 @@ public class NewPostFragment extends Fragment {
 
                                         noOfPosts.update("no_of_posts", FieldValue.increment(1));
 
-                                        // Code for showing progressDialog while uploading
                                         ProgressDialog progressDialog = new ProgressDialog(requireContext());
                                         progressDialog.setTitle("Uploading...");
                                         progressDialog.show();
 
-                                        // Defining the child of storageReference
                                         StorageReference ref = storageReference.child("users").child(currentUser.getUid()).child(currentUser.getUid() + postUploadedTimeStamp);
 
-                                        // adding listeners on upload
-                                        // or failure of image
                                         ref.putFile(selectedImage).addOnSuccessListener(
                                                         new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
@@ -194,8 +190,6 @@ public class NewPostFragment extends Fragment {
                                                                                                     @Override
                                                                                                     public void onSuccess(Void aVoid) {
 
-                                                                                                        // Image uploaded successfully
-                                                                                                        // Dismiss dialog
                                                                                                         progressDialog.dismiss();
                                                                                                         Toast.makeText(requireContext(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                                                                                     }
@@ -229,7 +223,6 @@ public class NewPostFragment extends Fragment {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
 
-                                                        // Error, Image not uploaded
                                                         progressDialog.dismiss();
                                                         Toast.makeText(requireContext(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                     }
@@ -237,8 +230,6 @@ public class NewPostFragment extends Fragment {
                                                 .addOnProgressListener(
                                                         new OnProgressListener<UploadTask.TaskSnapshot>() {
 
-                                                            // Progress Listener for loading
-                                                            // percentage on the dialog box
                                                             @Override
                                                             public void onProgress(
                                                                     UploadTask.TaskSnapshot taskSnapshot) {

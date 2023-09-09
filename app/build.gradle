@@ -4,15 +4,15 @@ plugins {
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.tabish.tabzsnap"
         minSdkVersion 16
-        targetSdkVersion 31
-        versionCode 21
-        versionName "5.1"
+        targetSdkVersion 33
+        versionCode 22
+        versionName "5.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

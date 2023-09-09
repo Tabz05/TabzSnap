@@ -34,12 +34,12 @@ public class SignIn extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+
                             Intent goToMainActivity = new Intent (getApplicationContext(),MainActivity.class);
                             goToMainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(goToMainActivity);
                         } else {
-                            // If sign in fails, display a message to the user.
+
 
                             Toast.makeText(SignIn.this,"Sign In Unsuccessful, inavlid credentials",Toast.LENGTH_SHORT).show();
                         }

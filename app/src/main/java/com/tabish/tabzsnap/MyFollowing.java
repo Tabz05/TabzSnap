@@ -105,7 +105,7 @@ public class MyFollowing extends AppCompatActivity {
         });
 
 
-        MyFollowingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() { //when an item of listview is clicked
+        MyFollowingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 

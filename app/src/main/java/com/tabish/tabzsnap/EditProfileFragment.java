@@ -222,11 +222,8 @@ public class EditProfileFragment extends Fragment {
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
 
-        // Defining the child of storageReference
         StorageReference ref = storageReference.child("users").child(currentUser.getUid()).child("profilePic");
 
-        // adding listeners on upload
-        // or failure of image
         ref.putFile(selectedImage).addOnSuccessListener(
                         new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
@@ -248,8 +245,6 @@ public class EditProfileFragment extends Fragment {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
 
-                                                        // Image uploaded successfully
-                                                        // Dismiss dialog
                                                         progressDialog.dismiss();
                                                         Toast.makeText(getContext(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                                     }
@@ -276,7 +271,7 @@ public class EditProfileFragment extends Fragment {
                     public void onFailure(@NonNull Exception e)
                     {
 
-                        // Error, Image not uploaded
+
                         progressDialog.dismiss();
                         //Toast.makeText(EditProfile.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -302,7 +297,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
         if(isAdded()) {
