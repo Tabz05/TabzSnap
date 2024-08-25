@@ -1,4 +1,4 @@
-# TabzSnap-android-application
+# TabzSnap
 Social media android application.
 
 Overview:
